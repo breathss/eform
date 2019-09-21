@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="My97DatePicker/WdatePicker.js"></script>
+  <script src="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.min.js"></script>
+  
+    <link href="eform.css" rel="stylesheet" />
+    <script src="Eform.js"></script>
+
+</head>
+<body style="
+    margin: auto 20%;
+">
+    <button id="btn_sub">获取表单的值</button>
+    <div id="form" ></div>
+
+    <script>
+        var formd;
+
+        $('#btn_sub').off().on('click', function () {
+            formd.getValidForm(function (data) {
+                console.log(data);
+            });
+        });
+        $(function ()
+        {
+            formd=  new Eform({
+                id: 'form',
+               theme:'dark',
+                layer:2,
+                mode:2,
+                title:'申请信息',
+                displayFields: [
+                   { title: '短字串', index: '1', col: 1, extra: '<button>生成编号</button>', required: true},
+                      {
+                          title: '数字', index: '10', type: 'NUMBER', disabled: true,
+                      },
+                   {
+                       title: '选择框', index: '2', type: 'SELECT', data: ["选择1", "选择2", "选择3"], required: true
+                   },
+                    {
+                        title: '选择框2', index: '3', type: 'SELECT', data: [{ title: '测试', index: '123' }, { title: '测试2', index: '12' }, { title: '测试3', index: '1' }]
+                    },
+                   { title: '时间选择', index: '4', type: 'DATE' },
+              
+                   { title: '单选框', index: '5', type: 'RADIO', data: ["选择1", "选择2", "选择3"]},
+                   { title: '多选框', index: '6', type: 'CHECKBOX', data: ["选择1", "选择2", "选择3"] },
+                   { title: '文本填充', index: '7', type: 'TEXT', col: 1, required: true },
+           
+                ]
+            });
+            formd.init();
+            formd.setFields({
+                1: "1234",
+                2: "选择1",
+                3: "12",
+                4: '2016-07-08',
+                5: '选择3',
+                6: '选择3',
+                7: '11233dsdsds'
+            });
+			/*
+         
+            formd.prependDisplayFields([
+               { title: '审核信息' },
+               { title: '是否同意', index: '5', type: 'RADIO', data: ["同意", "不同意"]},
+               { title: '审核意见', index: '5', col: 1, type: 'TEXT', required: true },
+            ]);
+			*/
+
+            formd.appendDisplayFields([
+           { title: '审核信息' },
+          { title: '是否同意', index: 'sfty', type: 'RADIO', data: ["同意", "不同意"], disabled: false, theme: '' },
+          { title: '审核意见', index: 'scy', col: 1, type: 'TEXT', required: true, disabled: false, theme: '' },
+            ]);
+            // 
+      
+           // getDt
+        })
+
+    </script>
+</body>
+</html>
